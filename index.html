@@ -567,7 +567,7 @@ photoInput.addEventListener('change', function(e){ var files = e.target.files; i
 function makeQR(text){ var el = document.getElementById('qrcode'); el.innerText=''; var p = document.createElement('div'); p.style.fontSize='11px'; p.style.color='var(--muted)'; p.style.padding='6px'; p.innerText = text.length>80 ? text.slice(0,80) + '...' : text; el.appendChild(p); }
 <script>
 (async function() {
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw8GUDZum0FGyZVbt9VT6ZJxqExCHrq_7U14MbtsccPA-LmhdMJNJ5pWXJxa2xT_dZgww/exec"; //← paste your Apps Script Web App URL here
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzGJ2UZvd5Lkm1ifXuhj9p1kKERxI4Q0GdJik6oMesZy8vjW_LMc1ZeCcRZUBUH_RliPQ/exec"; //← paste your Apps Script Web App URL here
 
   async function collectFormData() {
     const form = document.getElementById('checklistForm');
