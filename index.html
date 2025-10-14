@@ -594,69 +594,24 @@ function saveToLocalStorage() {
 
 function loadFromLocalStorage() {
   var raw = localStorage.getItem(STORAGE_KEY);
-  if(!raw) return;
-  try { } catch(e){ return; }
+  if (!raw) return;
+
+  try {
+    var data = JSON.parse(raw);
+  } catch (e) {
+    console.error('Failed to parse saved data:', e);
+    return;
+  }
+
   var form = document.getElementById('checklistForm');
   var elements = form.elements;
-  for (var i=0;i<elements.length;i++) {
+  for (var i = 0; i < elements.length; i++) {
     var el = elements[i];
-    if(!el.name) continue;
-    if(data[el.name] !== undefined) el.value = data[el.name];
+    if (!el.name) continue;
+    if (data[el.name] !== undefined) el.value = data[el.name];
   }
-  if(data._signature) { loadSignatureFromDataURL(data._signature); }
+
+  if (data._signature) loadSignatureFromDataURL(data._signature);
   var photos = JSON.parse(localStorage.getItem(STORAGE_KEY + '_photos') || '[]');
-  photos.forEach(function(p){ addPhotoPreview(p); });
+  photos.forEach(function (p) { addPhotoPreview(p); });
 }
-
-document.addEventListener('input', function(e){ setTimeout(saveToLocalStorage, 600); });
-document.addEventListener('DOMContentLoaded', function(){ loadFromLocalStorage(); setInterval(saveToLocalStorage, 5000); makeQR('Host this HTML file and point the QR to the hosted URL to open the checklist on other devices.'); });
-
-
-// Print / PDF assembly
-document.getElementById('downloadPdf').addEventListener('click', function(){
-  saveToLocalStorage();
-  var raw = localStorage.getItem(STORAGE_KEY);
-  if(!raw){ alert('No saved data to print. Fill the form first.'); return; }
-  var data = JSON.parse(raw);
-  var printArea = document.getElementById('printArea');
-  printArea.innerHTML = '';
-  var h = '<div style="padding:18px;font-family:Arial;color:black">';
-  h += '<h2>YHE Logistics Inc. — PIT Inspection</h2>';
-  h += '<div>Saved: ' + (data._saved_at || '') + '</div><hr />';
-  for(var k in data){ if(k.startsWith('_')) continue; h += '<div style="margin-bottom:8px;"><strong>' + k + ':</strong> ' + (data[k] || '') + '</div>'; }
-  if(data._signature){ h += '<div style="margin-top:10px;"><strong>Signature:</strong><br/><img src="' + data._signature + '" style="max-width:320px;border:1px solid #ccc"/></div>'; }
-  if(data._photos && data._photos.length){ h += '<div style="margin-top:10px;"><strong>Photos:</strong><br/>'; data._photos.forEach(function(p){ h += '<img src="' + p + '" style="max-width:220px;margin:6px;border:1px solid #ccc" />'; }); h += '</div>'; }
-  h += '</div>';
-  printArea.innerHTML = h;
-  setTimeout(function(){ window.print(); }, 250);
-});
-
-// Clear saved
-document.getElementById('clearAll').addEventListener('click', function(){ if(confirm('Clear all saved data (this will remove signature and photos) ?')) { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(STORAGE_KEY + '_signature'); localStorage.removeItem(STORAGE_KEY + '_photos'); location.reload(); } });
-
-// Demo fill
-document.getElementById('fillDemo').addEventListener('click', function(){ var form = document.getElementById('checklistForm'); var sels = form.querySelectorAll('select'); for(var i=0;i<sels.length;i++) sels[i].selectedIndex = 0; var inputs = form.querySelectorAll('input[type=text]'); for(var i=0;i<inputs.length;i++) inputs[i].value = 'JD'; var notes = form.querySelectorAll('textarea'); for(var i=0;i<notes.length;i++) notes[i].value = ''; saveToLocalStorage(); alert('Demo filled. You can now Download JSON or Save/Print (PDF).'); });
-
-// Signature capture
-var canvas = document.getElementById('sigCanvas'); var ctx = canvas.getContext('2d'); var drawing=false; var lastPos=null;
-function getPointerPos(e){ var rect=canvas.getBoundingClientRect(); if(e.touches && e.touches.length) e=e.touches[0]; return { x: (e.clientX-rect.left)*(canvas.width/rect.width), y: (e.clientY-rect.top)*(canvas.height/rect.height) }; }
-canvas.addEventListener('mousedown', function(e){ drawing=true; lastPos=getPointerPos(e); }); canvas.addEventListener('touchstart', function(e){ drawing=true; lastPos=getPointerPos(e); });
-canvas.addEventListener('mousemove', function(e){ if(!drawing) return; var p=getPointerPos(e); ctx.lineWidth=3; ctx.lineCap='round'; ctx.strokeStyle='#ffffff'; ctx.beginPath(); ctx.moveTo(lastPos.x,lastPos.y); ctx.lineTo(p.x,p.y); ctx.stroke(); lastPos=p; });
-canvas.addEventListener('touchmove', function(e){ if(!drawing) return; var p=getPointerPos(e); ctx.lineWidth=3; ctx.lineCap='round'; ctx.strokeStyle='#ffffff'; ctx.beginPath(); ctx.moveTo(lastPos.x,lastPos.y); ctx.lineTo(p.x,p.y); ctx.stroke(); lastPos=p; e.preventDefault(); });
-['mouseup','mouseleave','touchend','touchcancel'].forEach(function(ev){ canvas.addEventListener(ev, function(){ drawing=false; lastPos=null; }); });
-
-document.getElementById('clearSig').addEventListener('click', function(){ ctx.clearRect(0,0,canvas.width,canvas.height); localStorage.removeItem(STORAGE_KEY + '_signature'); saveToLocalStorage(); });
-document.getElementById('saveSig').addEventListener('click', function(){ var dataURL = canvas.toDataURL('image/png'); localStorage.setItem(STORAGE_KEY + '_signature', dataURL); saveToLocalStorage(); alert('Signature saved locally.'); });
-function loadSignatureFromDataURL(dataURL){ var img = new Image(); img.onload = function(){ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(img,0,0,canvas.width,canvas.height); } ; img.src = dataURL; }
-
-// Photo upload & preview
-var photoInput = document.getElementById('photoInput');
-function addPhotoPreview(dataURL){ var c = document.getElementById('photoContainer'); var img = document.createElement('img'); img.src = dataURL; img.className='photo-preview'; c.appendChild(img); }
-photoInput.addEventListener('change', function(e){ var files = e.target.files; if(!files || !files.length) return; var reader = new FileReader(); reader.onload = function(ev){ var dataURL = ev.target.result; var photos = JSON.parse(localStorage.getItem(STORAGE_KEY + '_photos') || '[]'); photos.push(dataURL); localStorage.setItem(STORAGE_KEY + '_photos', JSON.stringify(photos)); addPhotoPreview(dataURL); saveToLocalStorage(); }; reader.readAsDataURL(files[0]); });
-
-// simple QR placeholder
-function makeQR(text){ var el = document.getElementById('qrcode'); el.innerText=''; var p = document.createElement('div'); p.style.fontSize='11px'; p.style.color='var(--muted)'; p.style.padding='6px'; p.innerText = text.length>80 ? text.slice(0,80) + '...' : text; el.appendChild(p); }
-
-</script>
-</body></html>
-<!-- <button class="btn" id="downloadJson">Download JSON</button> -->
