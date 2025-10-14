@@ -476,7 +476,7 @@ select:focus, textarea:focus, input[type='text']:focus{outline:2px solid rgba(36
 
 <script>
 (async function() {
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby4_MFCBL9f-Kg1bqwFUGwDi3ZADshmv9aogK7D4qsZvT-ynKlKiPc2FIBOnBuiLoURdg/exec"; // ← paste your Apps Script Web App URL here
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwRmxvxCT9snL3soqWdmkQtsawS5-K2hAN95VN1plgwRHpHrQ9lt0bKOtB3KVoUYfQ-jA/exec"; // ← paste your Apps Script Web App URL here
 
   async function collectFormData() {
     const form = document.getElementById('checklistForm');
@@ -524,7 +524,7 @@ select:focus, textarea:focus, input[type='text']:focus{outline:2px solid rgba(36
   }
 
   async function postToServer(payload) {
-    const res = await fetch("https://script.google.com/macros/s/AKfycby4_MFCBL9f-Kg1bqwFUGwDi3ZADshmv9aogK7D4qsZvT-ynKlKiPc2FIBOnBuiLoURdg/exec", {
+    const res = await fetch("WEB_APP_URL", {
       method: 'POST',
       mode: 'cors',
       headers: {
