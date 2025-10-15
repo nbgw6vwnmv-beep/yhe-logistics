@@ -517,7 +517,7 @@ select:focus, textarea:focus, input[type='text']:focus{outline:2px solid rgba(36
   }
 
   async function postToServer(payload) {
-    const res = await fetch(WEB_APP_URL, {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbxPFjuSkAL0Zp3Lf6yHX7jEpN7Zdo25QrpohPT-LgRLmjOOz6YUvDlzce1Ei8V0ksUZHw/exec", {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
