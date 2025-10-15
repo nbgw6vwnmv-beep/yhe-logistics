@@ -9,52 +9,92 @@
     body {
       font-family: Arial, sans-serif;
       background: #f5f7fa;
-      color: #222;
       margin: 0;
       padding: 0;
+      color: #222;
     }
+
     .container {
-      max-width: 800px;
+      max-width: 850px;
       margin: 40px auto;
-      background: white;
+      background: #fff;
       border-radius: 10px;
-      padding: 30px 40px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 40px;
     }
+
     h1 {
       text-align: center;
       color: #0a3d62;
+      margin-bottom: 10px;
     }
+
+    p.subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
     label {
+      font-weight: bold;
       display: block;
       margin-top: 15px;
-      font-weight: bold;
     }
-    input, textarea, select, button {
+
+    input, textarea, select {
       width: 100%;
-      margin-top: 5px;
       padding: 10px;
+      margin-top: 5px;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 1em;
     }
+
+    select {
+      background-color: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .section-title {
+      font-size: 1.2em;
+      margin-top: 25px;
+      color: #24a148;
+      border-bottom: 2px solid #24a148;
+      padding-bottom: 5px;
+    }
+
     button {
       background-color: #24a148;
       color: white;
       border: none;
-      cursor: pointer;
+      border-radius: 6px;
+      padding: 12px 20px;
+      font-size: 1.1em;
       font-weight: bold;
-      transition: background 0.2s ease;
+      cursor: pointer;
       margin-top: 25px;
+      width: 100%;
+      transition: background 0.3s ease;
     }
+
     button:hover {
       background-color: #1e8c3d;
     }
+
     .footer {
       text-align: center;
       font-size: 0.9em;
-      color: #666;
-      margin-top: 30px;
+      color: #777;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px;
+      }
     }
   </style>
 </head>
@@ -62,37 +102,105 @@
 <body>
   <div class="container">
     <h1>PIT Inspection Checklist</h1>
-    <p>Submit your daily PIT inspection results below. Data will be saved automatically to the YHE PIT Inspection Log sheet.</p>
+    <p class="subtitle">Daily Pre-Use Inspection — YHE Logistics Inc.</p>
 
-    <!-- ✅ This form submits directly to your Apps Script web app -->
+    <!-- ✅ Direct POST form to Google Apps Script (no JS fetch) -->
     <form id="checklistForm"
           action="https://script.google.com/macros/s/AKfycbyBdOfKn0Ayd63jgUBeazJUzT78MKfEAczYBZJuYXm7_QsshAyfIb3NiMCnqxlu7HoU2w/exec"
           method="POST"
           target="_blank">
 
+      <!-- Basic info -->
       <label for="pit_number">PIT Number</label>
-      <input type="text" id="pit_number" name="pit_number" placeholder="Enter PIT number" required />
+      <input type="text" id="pit_number" name="pit_number" placeholder="e.g. PIT-001" required>
 
       <label for="inspection_date">Inspection Date</label>
-      <input type="date" id="inspection_date" name="inspection_date" required />
+      <input type="date" id="inspection_date" name="inspection_date" required>
 
-      <label for="general_comments">General Comments</label>
-      <textarea id="general_comments" name="general_comments" rows="4" placeholder="Notes, issues, or comments..."></textarea>
+      <label for="operator_name">Operator Name</label>
+      <input type="text" id="operator_name" name="operator_name" placeholder="Full name" required>
 
-      <!-- ✅ Example checklist section — you can add more questions here -->
-      <label for="brakes">Brakes Functioning</label>
-      <select id="brakes" name="brakes">
+      <!-- Section 1 -->
+      <div class="section-title">1. Safety Equipment</div>
+
+      <label>Seatbelt Condition</label>
+      <select name="seatbelt_condition" required>
         <option value="">-- Select --</option>
         <option value="OK">OK</option>
         <option value="Needs Repair">Needs Repair</option>
       </select>
 
-      <label for="horn">Horn Working</label>
-      <select id="horn" name="horn">
+      <label>Horn Working</label>
+      <select name="horn_working" required>
         <option value="">-- Select --</option>
         <option value="OK">OK</option>
         <option value="Needs Repair">Needs Repair</option>
       </select>
+
+      <label>Backup Alarm</label>
+      <select name="backup_alarm" required>
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
+
+      <label>Lights / Beacon</label>
+      <select name="lights_beacon" required>
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
+
+      <!-- Section 2 -->
+      <div class="section-title">2. Mechanical Condition</div>
+
+      <label>Brakes Functioning</label>
+      <select name="brakes_functioning" required>
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
+
+      <label>Steering Operation</label>
+      <select name="steering_operation" required>
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
+
+      <label>Tires / Wheels</label>
+      <select name="tires_wheels" required>
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
+
+      <label>Forks / Attachments</label>
+      <select name="forks_attachments" required>
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
+
+      <label>Fluid Leaks (Oil, Fuel, Coolant)</label>
+      <select name="fluid_leaks" required>
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
+
+      <label>Overhead Guard Condition</label>
+      <select name="overhead_guard" required>
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
+
+      <!-- Section 3 -->
+      <div class="section-title">3. Documentation</div>
+
+      <label for="general_comments">General Comments / Notes</label>
+      <textarea id="general_comments" name="general_comments" rows="4" placeholder="Add details about defects, issues, or notes..."></textarea>
 
       <button type="submit" id="submitToCloud">Submit Inspection</button>
     </form>
@@ -102,18 +210,15 @@
     </div>
   </div>
 
+  <!-- Optional local save / load -->
   <script>
-    // Optional: auto-save form data locally
     const STORAGE_KEY = 'pit_checklist_sections_v1';
 
     function saveToLocalStorage() {
       const form = document.getElementById('checklistForm');
       const data = {};
-      const elements = form.elements;
-      for (let i = 0; i < elements.length; i++) {
-        const el = elements[i];
-        if (!el.name) continue;
-        data[el.name] = el.value;
+      for (let el of form.elements) {
+        if (el.name) data[el.name] = el.value;
       }
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     }
@@ -124,12 +229,11 @@
       try {
         const data = JSON.parse(raw);
         const form = document.getElementById('checklistForm');
-        for (let i = 0; i < form.elements.length; i++) {
-          const el = form.elements[i];
+        for (let el of form.elements) {
           if (data[el.name]) el.value = data[el.name];
         }
-      } catch (e) {
-        console.error('Failed to load saved data:', e);
+      } catch (err) {
+        console.warn('Could not load saved data');
       }
     }
 
@@ -138,4 +242,3 @@
   </script>
 </body>
 </html>
-
