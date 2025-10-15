@@ -1,618 +1,141 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>PIT Inspection Checklist — YHE Logistics Inc.</title>
-<style>
-:root{--bg:#07090b;--card:#0f1418;--muted:#9aa6ad;--accent:#24a148;--glass:rgba(255,255,255,0.03);--text:#e6eef2}
-body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:linear-gradient(180deg,#030405 0%, #0b0f12 100%);color:var(--text)}
-.container{max-width:920px;margin:14px auto;padding:16px}
-.header{display:flex;gap:12px;align-items:center;margin-bottom:12px}
-.logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#0b3 0%, #024 100%);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:#dfffe0}
-.h1{font-size:20px;margin:0}
-.card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,8,0.6)}
-.section-header{font-weight:800;padding:10px 12px;border-radius:8px;background:rgba(36,161,72,0.06);margin-top:10px;color:var(--text)}
-.item{background:var(--glass);padding:10px;border-radius:8px;margin:8px 0;display:flex;flex-direction:column;gap:8px}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-label{
-  font-weight:700;color:var(--text);
-}
-select, textarea, input[type='text']{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:var(--text)}
-select:focus, textarea:focus, input[type='text']:focus{outline:2px solid rgba(36,161,72,0.12);border-color:rgba(36,161,72,0.25)}
-.btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#178b39);color:#05110a;font-weight:700;border:none;cursor:pointer}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
-.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
-.small{font-size:13px;color:var(--muted)}
-.footer{margin-top:18px;font-size:13px;color:var(--muted);text-align:center}
-.signature-pad{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.04)}
-.photo-preview{max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.04);}
-@media (max-width:520px){.row{flex-direction:column;align-items:stretch}select{width:100%}}
-.printable{display:none;}
-@media print{body{background:white!important;color:black!important}.card{background:white!important;color:black!important;box-shadow:none}.item{background:transparent;border:none}.no-print{display:none!important}.printable{display:block}}
-</style>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PIT Inspection Checklist — YHE Logistics Inc.</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #0a3d62;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    button {
+      background-color: #24a148;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s ease;
+      margin-top: 25px;
+    }
+    button:hover {
+      background-color: #1e8c3d;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 30px;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
-  <div class="header">
-    <div class="logo">YHE</div>
-    <div><div class="h1">PIT Inspection Checklist</div><div class="small">YHE Logistics Inc. — Dark mode</div></div>
-  </div>
-  <!-- PIT # and Date Fields (stacked layout for phones) -->
-<div class="form-group" style="margin-bottom: 1em;">
-  <label for="pit_number">PIT #:</label>
-  <select id="pit_number" name="pit_number" required style="width: 100%; padding: 0.5em;">
-    <option value="">Select PIT</option>
-    <option value="PIT 1">PIT 1</option>
-    <option value="PIT 2">PIT 2</option>
-    <option value="PIT 3">PIT 3</option>
-    <option value="PIT 4">PIT 4</option>
-    <option value="PIT 5">PIT 5</option>
-    <option value="PIT 6">PIT 6</option>
-    <option value="PIT 7">PIT 7</option>
-    <option value="PIT 8">PIT 8</option>
-    <option value="PIT 9">PIT 9</option>
-    <option value="PIT 10">PIT 10</option>
-    <option value="PIT 11">PIT 11</option>
-    <option value="PIT 12">PIT 12</option>
-  </select>
-</div>
-<input type="text" name="motor_item_10_inspector" placeholder="Inspector initials / name" />
-<div class="form-group" style="margin-bottom: 1em;">
-  <label for="inspection_date">Date:</label>
-  <input type="date" id="inspection_date" name="inspection_date" required style="width: 100%; padding: 0.5em;">
-</div>
+  <div class="container">
+    <h1>PIT Inspection Checklist</h1>
+    <p>Submit your daily PIT inspection results below. Data will be saved automatically to the YHE PIT Inspection Log sheet.</p>
 
-  <div class="card">
-    <form id="checklistForm" 
-      action="https://script.google.com/macros/s/AKfycbyBdOfKn0Ayd63jgUBeazJUzT78MKfEAczYBZJuYXm7_QsshAyfIb3NiMCnqxlu7HoU2w/exec" 
-      method="POST"
-      target="_blank">
+    <!-- ✅ This form submits directly to your Apps Script web app -->
+    <form id="checklistForm"
+          action="https://script.google.com/macros/s/AKfycbyBdOfKn0Ayd63jgUBeazJUzT78MKfEAczYBZJuYXm7_QsshAyfIb3NiMCnqxlu7HoU2w/exec"
+          method="POST"
+          target="_blank">
 
-<div class="section-header">Motor</div>
+      <label for="pit_number">PIT Number</label>
+      <input type="text" id="pit_number" name="pit_number" placeholder="Enter PIT number" required />
 
-      <div class="item" data-id="motor_item_10">
-        <label>Fluid Level</label>
-        <div class="row">
-          <select name="motor_item_10">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="motor_item_10_notes" placeholder="Notes / comments"></textarea>
-      </div>
+      <label for="inspection_date">Inspection Date</label>
+      <input type="date" id="inspection_date" name="inspection_date" required />
 
-      <div class="item" data-id="motor_item_11">
-        <label>Belts</label>
-        <div class="row">
-          <select name="motor_item_11">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="motor_item_11_notes" placeholder="Notes / comments"></textarea>
-      </div>
+      <label for="general_comments">General Comments</label>
+      <textarea id="general_comments" name="general_comments" rows="4" placeholder="Notes, issues, or comments..."></textarea>
 
-      <div class="item" data-id="motor_item_12">
-        <label>Motor Compartment (dust,trash)</label>
-        <div class="row">
-          <select name="motor_item_12">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="motor_item_12_notes" placeholder="Notes / comments"></textarea>
-      </div>
+      <!-- ✅ Example checklist section — you can add more questions here -->
+      <label for="brakes">Brakes Functioning</label>
+      <select id="brakes" name="brakes">
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
 
-      <div class="item" data-id="motor_item_13">
-        <label>Hydraulic lines/chains</label>
-        <div class="row">
-          <select name="motor_item_13">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="motor_item_13_notes" placeholder="Notes / comments"></textarea>
-      </div>
+      <label for="horn">Horn Working</label>
+      <select id="horn" name="horn">
+        <option value="">-- Select --</option>
+        <option value="OK">OK</option>
+        <option value="Needs Repair">Needs Repair</option>
+      </select>
 
-      <div class="item" data-id="motor_item_14">
-        <label>Hoses (condition)</label>
-        <div class="row">
-          <select name="motor_item_14">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="motor_item_14_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="motor_item_15">
-        <label>Lose cables/Electrical connections</label>
-        <div class="row">
-          <select name="motor_item_15">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="motor_item_15_notes" placeholder="Notes / comments"></textarea>
-      </div>
-<div class="section-header">Body</div>
-      <div class="item" data-id="body_item_1">
-        <label>Body damage</label>
-        <div class="row">
-          <select name="body_item_1">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="body_item_1_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="body_item_2">
-        <label>Tires</label>
-        <div class="row">
-          <select name="body_item_2">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="body_item_2_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="body_item_3">
-        <label>Rollover protection cage</label>
-        <div class="row">
-          <select name="body_item_3">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="body_item_3_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="body_item_4">
-        <label>Forks, attachment</label>
-        <div class="row">
-          <select name="body_item_4">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="body_item_4_notes" placeholder="Notes / comments"></textarea>
-      </div>
-<div class="section-header">Operator Compartment</div>
-      <div class="item" data-id="operator_compartment_item_1">
-        <label>Trash/Dust</label>
-        <div class="row">
-          <select name="operator_compartment_item_1">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_1_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_2">
-        <label>Operators Manual</label>
-        <div class="row">
-          <select name="operator_compartment_item_2">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_2_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_3">
-        <label>Warnings/weight capacity labels</label>
-        <div class="row">
-          <select name="operator_compartment_item_3">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_3_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_4">
-        <label>Operation controls</label>
-        <div class="row">
-          <select name="operator_compartment_item_4">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_4_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_5">
-        <label>Seat belt</label>
-        <div class="row">
-          <select name="operator_compartment_item_5">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_5_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_6">
-        <label>Mirrors</label>
-        <div class="row">
-          <select name="operator_compartment_item_6">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_6_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_7">
-        <label>Horn</label>
-        <div class="row">
-          <select name="operator_compartment_item_7">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_7_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_8">
-        <label>Lights</label>
-        <div class="row">
-          <select name="operator_compartment_item_8">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_8_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_9">
-        <label>Hand breaks</label>
-        <div class="row">
-          <select name="operator_compartment_item_9">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_9_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_10">
-        <label>Cluster/gauges</label>
-        <div class="row">
-          <select name="operator_compartment_item_10">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_10_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operator_compartment_item_11">
-        <label>Safety Harnes</label>
-        <div class="row">
-          <select name="operator_compartment_item_11">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operator_compartment_item_11_notes" placeholder="Notes / comments"></textarea>
-      </div>
-<div class="section-header">Operation</div>
-      <div class="item" data-id="operation_item_1">
-        <label>Battery level</label>
-        <div class="row">
-          <select name="operation_item_1">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_1_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_2">
-        <label>Forks, attachment</label>
-        <div class="row">
-          <select name="operation_item_2">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_2_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_3">
-        <label>Clamp release</label>
-        <div class="row">
-          <select name="operation_item_3">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_3_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_4">
-        <label>Deadman</label>
-        <div class="row">
-          <select name="operation_item_4">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_4_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_5">
-        <label>Ignition</label>
-        <div class="row">
-          <select name="operation_item_5">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_5_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_6">
-        <label>Steering wheel</label>
-        <div class="row">
-          <select name="operation_item_6">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_6_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_7">
-        <label>Tilt up/down</label>
-        <div class="row">
-          <select name="operation_item_7">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_7_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_8">
-        <label>Shift left/right</label>
-        <div class="row">
-          <select name="operation_item_8">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_8_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_9">
-        <label>Accelerator</label>
-        <div class="row">
-          <select name="operation_item_9">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_9_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="item" data-id="operation_item_10">
-        <label>Comments</label>
-        <div class="row">
-          <select name="operation_item_10">
-            <option value="OK">OK</option>
-            <option value="Needs Repair">Needs Repair</option>
-            <option value="N/A">N/A</option>
-          </select>
-        </div>
-        <textarea name="operation_item_10_notes" placeholder="Notes / comments"></textarea>
-      </div>
-
-      <div class="section-header">Comments / Notes</div>
-      <div class="item">
-        <label>General comments (no dropdown):</label>
-        <textarea name="general_comments" placeholder="Type any additional comments or notes here" style="min-height:120px"></textarea>
-      </div>
-
+      <button type="submit" id="submitToCloud">Submit Inspection</button>
     </form>
 
-    <div style="margin-top:10px" class="card" id="extrasCard">
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:220px;">
-          <div class="small">Signature</div>
-          <div class="signature-pad">
-            <canvas id="sigCanvas" width="600" height="160" style="width:100%;height:120px;border-radius:6px;background:transparent;"></canvas>
-            <div style="display:flex;gap:8px;margin-top:8px;">
-              <button class="btn ghost" id="clearSig">Clear</button>
-              <button class="btn ghost" id="saveSig">Save Signature</button>
-            </div>
-            <div class="small" style="margin-top:6px;color:var(--muted)">Sign with finger or stylus. Saved locally on device.</div>
-          </div>
-        </div>
-        <div style="min-width:220px;">
-          <div class="small">Photo (optional)</div>
-          <input type="file" id="photoInput" accept="image/*" capture="environment" />
-          <div id="photoContainer" style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"></div>
-          <div class="small" style="color:var(--muted);margin-top:6px;">You can take a photo with the device camera or choose an existing photo. Photos are saved locally and included in exported JSON/PDF.</div>
-        </div>
-      </div>
+    <div class="footer">
+      <p>© 2025 YHE Logistics Inc. | PIT Checklist System</p>
     </div>
-
-    <div class="actions no-print">
-      <button class="btn" id="downloadJson"></button>
-      <button class="btn" id="downloadPdf">Save / Print (PDF)</button>
-      <button class="btn ghost" id="clearAll">Clear Saved</button>
-      <button class="btn ghost" id="fillDemo"></button>
-      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
-<button id="submitToCloud" class="btn">Submit</button>
-
-<script>
-  
-(async function() {
-  // 👇 Paste your exact Google Apps Script Web App URL here
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzqM7aFV7OaoeqUVOoNLPJm4yJCTv8ahfHDxchco5ZxJxz-e7S02EGlC5B7QBf45WCe9w/exec";
-
-  async function collectFormData() {
-    const form = document.getElementById('checklistForm');
-    const elements = form.elements;
-    let responses = {};
-
-    for (let i = 0; i < elements.length; i++) {
-      const el = elements[i];
-      if (!el.name) continue;
-      responses[el.name] = el.value;
-    }
-
-    const sigCanvas = document.getElementById('sigCanvas');
-    let signatureDataUrl = null;
-    if (sigCanvas) {
-      signatureDataUrl = localStorage.getItem('pit_checklist_sections_v1_signature') || sigCanvas.toDataURL('image/png');
-    }
-
-    let photos = [];
-    try {
-      const photosRaw = localStorage.getItem('pit_checklist_sections_v1_photos');
-      if (photosRaw) photos = JSON.parse(photosRaw);
-    } catch (e) {
-      const imgs = document.querySelectorAll('#photoContainer img');
-      imgs.forEach(img => { if (img.src) photos.push(img.src); });
-    }
-
-    return {
-      pit_number: responses['pit_number'] || '',
-      inspection_date: responses['inspection_date'] || '',
-      general_comments: responses['general_comments'] || '',
-      responses: responses,
-      signature: signatureDataUrl,
-      photos: photos
-    };
-  }
-
-  async function postToServer(payload) {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbzqM7aFV7OaoeqUVOoNLPJm4yJCTv8ahfHDxchco5ZxJxz-e7S02EGlC5B7QBf45WCe9w/exec", {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    // Important: handle non-JSON responses safely
-    const text = await res.text();
-    try {
-      return JSON.parse(text);
-    } catch (err) {
-      console.error('Server returned non-JSON:', text);
-      return { status: 'error', message: 'Server did not return valid JSON' };
-    }
-  }
-
-  const submitBtn = document.getElementById('submitToCloud');
-  if (!submitBtn) {
-    console.error("Submit button not found!");
-    return;
-  }
-
-    submitBtn.disabled = true;
-    submitBtn.innerText = 'Submitting...';
-    try {
-      if (typeof saveToLocalStorage === 'function') saveToLocalStorage();
-      const payload = await collectFormData();
-
-      if (result && result.status === 'ok') {
-        alert('✅ Submission saved to Google Sheets.');
-      } else {
-        alert('❌ Submission failed: ' + (result && result.message ? result.message : 'Unknown error'));
-      }
-    } catch (err) {
-      console.error(err);
-      alert('❌ Error submitting: ' + err.toString());
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerText = 'Submit';
-    }
-  });
-})();
-</script>
-
-</script>
-
-        
-
   </div>
-</div>
 
-<div id="printArea" class="printable"></div>
+  <script>
+    // Optional: auto-save form data locally
+    const STORAGE_KEY = 'pit_checklist_sections_v1';
 
-<script>
-const STORAGE_KEY = 'pit_checklist_sections_v1';
+    function saveToLocalStorage() {
+      const form = document.getElementById('checklistForm');
+      const data = {};
+      const elements = form.elements;
+      for (let i = 0; i < elements.length; i++) {
+        const el = elements[i];
+        if (!el.name) continue;
+        data[el.name] = el.value;
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
 
-function saveToLocalStorage() {
-  var form = document.getElementById('checklistForm');
-  var data = {};
-  var elements = form.elements;
-  for (var i=0;i<elements.length;i++) {
-    var el = elements[i];
-    if(!el.name) continue;
-    data[el.name] = el.value;
-  }
-  data._signature = localStorage.getItem(STORAGE_KEY + '_signature') || null;
-  data._photos = JSON.parse(localStorage.getItem(STORAGE_KEY + '_photos') || '[]');
-  data._saved_at = new Date().toISOString();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-}
+    function loadFromLocalStorage() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        const form = document.getElementById('checklistForm');
+        for (let i = 0; i < form.elements.length; i++) {
+          const el = form.elements[i];
+          if (data[el.name]) el.value = data[el.name];
+        }
+      } catch (e) {
+        console.error('Failed to load saved data:', e);
+      }
+    }
 
-function loadFromLocalStorage() {
-  var raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return;
+    document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
+    document.getElementById('checklistForm').addEventListener('input', saveToLocalStorage);
+  </script>
+</body>
+</html>
 
-  try {
-    var data = JSON.parse(raw);
-  } catch (e) {
-    console.error('Failed to parse saved data:', e);
-    return;
-  }
-
-  var form = document.getElementById('checklistForm');
-  var elements = form.elements;
-  for (var i = 0; i < elements.length; i++) {
-    var el = elements[i];
-    if (!el.name) continue;
-    if (data[el.name] !== undefined) el.value = data[el.name];
-  }
-
-  if (data._signature) loadSignatureFromDataURL(data._signature);
-  var photos = JSON.parse(localStorage.getItem(STORAGE_KEY + '_photos') || '[]');
-  photos.forEach(function (p) { addPhotoPreview(p); });
-}
